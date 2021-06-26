@@ -1,21 +1,14 @@
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Paper from '@material-ui/core/Paper';
-import { useState } from 'react';
 import AddressCard from '../AddressCard/AddressCard';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        alignItems: 'center',
+        alignContent: 'center',
     },
     paper: {
         height: 140,
@@ -33,17 +26,17 @@ function AddressList() {
 
     return (
         <div className="App-address-list">
-            <Grid container>
-                <Grid item>
+            <Grid container className={classes.root} spacing={2} justify={'center'}>
+                <Grid item xs={10}>
                     <AddressCard />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <AddressCard />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <AddressCard />
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <AddressCard />
                 </Grid>
             </Grid>

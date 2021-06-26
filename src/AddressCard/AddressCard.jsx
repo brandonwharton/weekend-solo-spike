@@ -10,9 +10,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 200,
     },
-    card: {
-        maxWidth: 200,
-    },
+    // card: {
+    //     maxWidth: 250,
+    // },
     media: {
         height: 0,
         paddingTop: '56.25%', // should be 16:9
@@ -21,18 +21,21 @@ const useStyles = makeStyles((theme) => ({
 
 function AddressCard() {
     const classes = useStyles();
-    
+
     return (
         <Card className={classes.card} >
             <CardHeader title="Card Title" />
-            <CardMedia
+            <CardMedia 
                 className={classes.media}
-                image="../images/image.jpg"
+                image="/image.jpg"
             />
             <CardContent>
                 <Typography variant="body2" component="p">
                     This is where address information is going to live.
-            </Typography>
+                </Typography>
+                <Typography variant="body2" component="p">
+                    This is where address information is going to live.
+                </Typography>
             </CardContent>
         </Card>
     )
