@@ -7,6 +7,12 @@ function CommentList() {
             <Typography variant="h3" component="h3">
                 Inside CommentList
             </Typography>
+            <Typography variant="h3" component="h3">
+                Inside CommentList
+            </Typography>
+            <Typography variant="h3" component="h3">
+                Inside CommentList
+            </Typography>
         </div>
     )
 }

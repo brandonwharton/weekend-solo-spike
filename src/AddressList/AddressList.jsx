@@ -10,6 +10,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import { useState } from 'react';
+import AddressCard from '../AddressCard/AddressCard';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,28 +21,41 @@ const useStyles = makeStyles((theme) => ({
         height: 140,
         width: 100,
     },
+
     control: {
         padding: theme.spacing(2),
     },
 }));
 
 function AddressList() {
-    const [spacing, setSpacing] = useState(2);
+    // const [spacing, setSpacing] = useState(2);
     const classes = useStyles();
 
     return (
         <div className="App-address-list">
-            <Grid container className={classes.root} spacing={2}>
+            <Grid container>
+                <Grid item>
+                    <AddressCard />
+                </Grid>
+                <Grid item>
+                    <AddressCard />
+                </Grid>
+                <Grid item>
+                    <AddressCard />
+                </Grid>
+                <Grid item>
+                    <AddressCard />
+                </Grid>
+            </Grid>
+            {/* <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
                     <Grid container justify="center" spacing={spacing}>
                         {[0, 1, 2, 3].map(value => (
-                            <Grid key={value} item>
-                                <Paper className={classes.paper} />
-                            </Grid>
+                            <Card 
                         ))}
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
             {/* <Typography variant="h3" component="h3">
                 Inside AddressList
             </Typography> */}
