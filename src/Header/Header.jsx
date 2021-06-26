@@ -1,7 +1,14 @@
+import './Header.css'
+import Typography from '@material-ui/core/Typography';
+
 function Header() {
 
     return (
-        <h1>Weekend Spike</h1>
+        <div className="App-header">
+            <Typography variant="h3" component="h1">
+                Weekend Spike
+            </Typography>
+        </div>
     )
 }
 

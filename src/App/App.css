@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  background-color: turquoise;
+}
+
 .App {
   text-align: center;
 }
@@ -14,8 +19,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #4d5564;
+  min-height: 12vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +40,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App-footer {
+  background-color: #23272e;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  color: white;
 }
