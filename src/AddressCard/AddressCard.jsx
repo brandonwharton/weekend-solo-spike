@@ -10,9 +10,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 200,
     },
-    // card: {
-    //     maxWidth: 250,
-    // },
+    card: {
+        backgroundColor: '#999',
+    },
     media: {
         height: 0,
         paddingTop: '56.25%', // should be 16:9
@@ -34,7 +34,7 @@ function AddressCard() {
                     This is where address information is going to live.
                 </Typography>
                 <Typography variant="body2" component="p">
-                    This is where address information is going to live.
+                    This is where ratings information is going to live.
                 </Typography>
             </CardContent>
         </Card>
