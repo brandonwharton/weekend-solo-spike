@@ -20,13 +20,19 @@ body {
 
 .App-header {
   background-color: #4d5564;
-  min-height: 12vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-address-list {
+  min-height: 45vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-link {
@@ -44,10 +50,11 @@ body {
 
 .App-footer {
   background-color: #23272e;
-  min-height: 20vh;
+  min-height: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   color: white;
+  flex-shrink: 0;
 }
