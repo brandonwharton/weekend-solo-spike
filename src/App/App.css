@@ -30,7 +30,7 @@ body {
 }
 
 .App-address-list {
-  min-height: 45vh;
+  min-height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,7 @@ body {
 
 .App-comment-list {
   background-color: rgb(110, 8, 110);
-  min-height: 40vh;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
