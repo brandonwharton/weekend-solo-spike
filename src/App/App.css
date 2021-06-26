@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  background-color: black;
+  padding: 0;
+  background-color: #23272e;
 }
 
 .App {
@@ -22,15 +23,16 @@ body {
 
 .App-address-list {
   background-color: turquoise;
-  min-height: 51vh;
-  max-height: 51vh;
+  border-bottom: .5vh solid black;
+  min-height: 50.5vh;
+  max-height: 50.5vh;
   /* display: flex;
   flex-direction: column; */
   /* flex-direction: row; */
   /* align-items: center;
   flex-wrap: wrap; */
   overflow: scroll;
-  margin: 2vh 0;
+  padding: 2vh 0;
 }
 
 .App-comment-list {
@@ -60,11 +62,12 @@ body {
 .App-footer {
   background-color: #23272e;
   min-height: 5vh;
+  max-height: 5vh;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-end; */
   color: white;
   flex-shrink: 0;
-  padding: 1vh;
+  padding: 1vh 0;
 }
