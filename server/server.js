@@ -26,7 +26,7 @@ app.get('/api/location', (req, res) => {
 //find location using Google geolocation API
 app.post('/api/location', (req, res) => {
     const queryText = `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.MAPS_API_KEY}`;
-
+    console.log('Inside POST to GOOGLE MAPS');
     axios.post(queryText)
         .then(response => {
             currentLocation = response.data;
