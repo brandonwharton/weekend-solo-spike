@@ -69,7 +69,7 @@ function LocationTesting() {
     }
 
     // console.log('local location state', currentLocation);
-    console.log('Current address object', firstAddress);
+    console.log('Current address object', firstAddress, secondAddress);
     return (
         <div className="App-location-testing">
             <Button 
@@ -98,6 +98,28 @@ function LocationTesting() {
                 <TextField 
                     label="state"
                     onChange={(event) => handleFirstAddressChange(event, 'state_code')}
+                >
+                </TextField>
+            </FormControl>
+            <FormControl className="address-form">
+                <TextField 
+                    label="dest address number"
+                    onChange={(event) => handleSecondAddressChange(event, 'number')}
+                >
+                </TextField>
+                <TextField 
+                    label="street name"
+                    onChange={(event) => handleSecondAddressChange(event, 'street_name')}
+                >
+                </TextField>
+                <TextField 
+                    label="city"
+                    onChange={(event) => handleSecondAddressChange(event, 'city')}
+                >
+                </TextField>
+                <TextField 
+                    label="state"
+                    onChange={(event) => handleSecondAddressChange(event, 'state_code')}
                 >
                 </TextField>
             </FormControl>
