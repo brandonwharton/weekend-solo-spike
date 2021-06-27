@@ -12,6 +12,7 @@ const locationRouter = require('./routes/location.router');
 let currentLocation;
 let firstAddressArray = [];
 let secondAddressArray = [];
+let distancesArray = [];
 
 
 /** ---------- MIDDLEWARE ---------- **/
@@ -44,7 +45,7 @@ app.post('/api/location', (req, res) => {
         })
 })
 
-// GET request to Google's geocaching API to convert given addresses to latitude and longitude
+// GET request to Google's geocoding API to convert given addresses to latitude and longitude
 app.get('/api/addresses', (req, res) => {
     console.log('Got to geocaching GET', req.query);
     const query = req.query;
@@ -75,9 +76,6 @@ app.get('/api/addresses', (req, res) => {
                 .catch(err => {
                     console.log('Problem with converting second location', err);
                 });
-
-
-
             console.log('First addressArrays', firstAddressArray[0]);
             
         })
@@ -88,15 +86,31 @@ app.get('/api/addresses', (req, res) => {
         })
 })
 
+// uses Google Distance Matrix API to figure out the distance between two points
+app.get('/api/distance', (req, res) => {
+    const query = req.query;
+
+    const queryText = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${query.firstNumber}+${query.firstStreet}+${query.firstStreetType},
+    +${query.firstCity},+${query.firstState}&destinations=${query.secondNumber}+${query.secondStreet}+${query.secondStreetType},
+    +${query.secondCity},+${query.secondState}&departure_time=now&key=${process.env.MAPS_API_KEY}`;
+
+    axios.get(queryText)
+        .then(response => {
+            console.log('Distance response:', response.data.rows);
+            distancesArray.push(response.data.rows);
+        })
+        .catch(err => {
+            console.log('error with distance calculating API', err);           
+        });
+})
+
+
+// local GET request for getting server-saved location data after using google Geocoding API
 app.get('/api/addresses/send', (req, res) => {
     console.log('Got to GET addresses');
-    res.send({
-        firstAddressObject: firstAddressArray[0],
-        secondAddressObject: secondAddressArray[0]
-    });
-
+    res.send(distancesArray[distancesArray.length-1]);
 })
-// get request to send response data back to client side 
+
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {

@@ -9,6 +9,7 @@ import './LocationTesting.css';
 function LocationTesting() {
     // state for storing current location after finding it
     const [currentLocation, setCurrentLocation] = useState({});
+    const [distance, setDistance] = useState([]);
     // states for storing address input data
     const [firstAddress, setFirstAddress] = useState({
         number: 0,
@@ -72,7 +73,7 @@ function LocationTesting() {
 
 
         // GET request
-        axios.get(`/api/addresses`, {
+        axios.get(`/api/distance`, {
             params: {
                 firstNumber: firstAddress.number,
                 firstStreet: firstAddress.street_name,
@@ -87,15 +88,16 @@ function LocationTesting() {
             },
         })
             .then(response => {
-                console.log('Got to nested GET request');
-                // then fetch server-stored address object data sent by Google
-                axios.get('/api/addresses/send')
-                    .then(secondResponse => {
-                        console.log('data in response', secondResponse.data);
-                    })
-                    .catch(err => {
-                        console.log('problem with nested GET for server data', err);
-                    })
+                console.log('Got distance', response);
+                // console.log('Got to nested GET request');
+                // // then fetch server-stored address object data sent by Google
+                // axios.get('/api/addresses/send')
+                //     .then(secondResponse => {
+                //         console.log('data in response', secondResponse.data);
+                //     })
+                //     .catch(err => {
+                //         console.log('problem with nested GET for server data', err);
+                //     })
                 // console.log('response for addresses:', response.data);
                 
             }) // end .then for Google API request
@@ -111,13 +113,28 @@ function LocationTesting() {
         axios.get('/api/addresses/send')
         .then(response => {
             console.log('data in response', response.data);
+            setDistance(response.data);
         })
         .catch(err => {
             console.log('problem with nested GET for server data', err);
         })
     }
 
+    const distanceDisplay = () => {
+        if (distance.length === 0) {
+            return
+        } else {
+            return (
+                <div className="distance-text">
+                    <h3>Distance between addresses is: {distance[0].elements[0].distance.text}</h3>
+                    <h3>And it will take you {distance[0].elements[0].duration.text} minutes to drive there.</h3>
+                </div>
+            )
+        }
+    }
 
+    // console.log(distance[0].elements[0].distance.text);
+    // console.log(distance[0].elements[0].duration.text);
     // console.log('local location state', currentLocation);
     // console.log('Current address object', firstAddress, secondAddress);
     return (
@@ -197,7 +214,7 @@ function LocationTesting() {
             >
                 Calculate Distance
             </Button>
-            
+            {distanceDisplay()}
         </div>
 
     )
