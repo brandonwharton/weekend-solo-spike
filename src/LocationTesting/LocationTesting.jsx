@@ -13,12 +13,14 @@ function LocationTesting() {
     const [firstAddress, setFirstAddress] = useState({
         number: 0,
         street_name: '',
+        street_type: '',
         city: '',
         state_code: ''
     });
     const [secondAddress, setSecondAddress] = useState({
         number: 0,
         street_name: '',
+        street_type: '',
         city: '',
         state_code: ''
     });
@@ -74,10 +76,12 @@ function LocationTesting() {
             params: {
                 firstNumber: firstAddress.number,
                 firstStreet: firstAddress.street_name,
+                firstStreetType: firstAddress.street_type,
                 firstCity: firstAddress.city,
                 firstState: firstAddress.state_code,
                 secondNumber: secondAddress.number,
                 secondStreet: secondAddress.street_name,
+                secondStreetType: secondAddress.street_type,
                 secondCity: secondAddress.city,
                 secondState: secondAddress.state_code,
             },
@@ -113,6 +117,11 @@ function LocationTesting() {
                 >
                 </TextField>
                 <TextField 
+                    label="street type"
+                    onChange={(event) => handleFirstAddressChange(event, 'street_type')}
+                >
+                </TextField>
+                <TextField 
                     label="city"
                     onChange={(event) => handleFirstAddressChange(event, 'city')}
                 >
@@ -132,6 +141,11 @@ function LocationTesting() {
                 <TextField 
                     label="street name"
                     onChange={(event) => handleSecondAddressChange(event, 'street_name')}
+                >
+                </TextField>
+                <TextField 
+                    label="street type"
+                    onChange={(event) => handleSecondAddressChange(event, 'street_type')}
                 >
                 </TextField>
                 <TextField 

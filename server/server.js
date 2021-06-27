@@ -10,8 +10,8 @@ require('dotenv').config();
 const locationRouter = require('./routes/location.router');
 // holds current location after fetching it from Google
 let currentLocation;
-let address1 = [];
-let address2 = [];
+let firstAddressArray = [];
+let secondAddressArray = [];
 
 
 /** ---------- MIDDLEWARE ---------- **/
@@ -47,19 +47,45 @@ app.post('/api/location', (req, res) => {
 // GET request to Google's geocaching API to convert given addresses to latitude and longitude
 app.get('/api/addresses', (req, res) => {
     console.log('Got to geocaching GET', req.query);
+    const query = req.query;
+
     
-    
-    const queryText = `https://maps.googleapis.com/maps/api/geocode/json?address=5609+Benton+Ave,+Edina,+MN&key=${process.env.MAPS_API_KEY}`;
-    res.sendStatus(200);
-    // axios.get(queryText)
-    //     .then(response => {
-    //         console.log('Response for address', response.data);
+    const queryText = `https://maps.googleapis.com/maps/api/geocode/json?address=${query.firstNumber}+${query.firstStreet}+${query.firstStreetType},
+    +${query.firstCity},+${query.firstState}&key=${process.env.MAPS_API_KEY}`;
+
+    axios.get(queryText)
+        // get first response, then send second request
+        .then(response => {
+            // console.log('Response for address', response.data);
+            firstAddressArray.push(response.data);
+            // send second address query
+            const secondQueryText = `https://maps.googleapis.com/maps/api/geocode/json?address=${query.secondNumber}+${query.secondStreet}+${query.secondStreetType},
+            +${query.secondCity},+${query.secondState}&key=${process.env.MAPS_API_KEY}`;
+
+            console.log('sending second query', secondQueryText);
             
-    //     })
-    //     .catch(err => {
-    //         console.log('Problem with converting given location', err);
-    //         res.sendStatus(500);
-    //     })
+            axios.get(secondQueryText)
+                .then(secondResponse => {
+                    console.log(secondResponse.data);
+                    
+                    secondAddressArray.push(secondResponse.data)
+                    console.log('second address array', secondAddressArray[0]);
+                    
+                })
+                .catch(err => {
+                    console.log('Problem with converting second location', err);
+                });
+
+
+
+            console.log('First addressArrays', firstAddressArray[0]);
+            
+        })
+        // catch for first query
+        .catch(err => {
+            console.log('Problem with converting given location', err);
+            res.sendStatus(500);
+        })
 })
 
 /** ---------- START SERVER ---------- **/
