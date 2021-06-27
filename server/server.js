@@ -88,6 +88,16 @@ app.get('/api/addresses', (req, res) => {
         })
 })
 
+app.get('/api/addresses/send', (req, res) => {
+    console.log('Got to GET addresses');
+    res.send({
+        firstAddressObject: firstAddressArray[0],
+        secondAddressObject: secondAddressArray[0]
+    });
+
+})
+// get request to send response data back to client side 
+
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {
     console.log('Listening on port: ', PORT);

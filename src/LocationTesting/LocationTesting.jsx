@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 
@@ -26,9 +26,9 @@ function LocationTesting() {
     });
 
 
-    useEffect(() => {
-        getLocation();
-    }, []);
+    // useEffect(() => {
+    //     getLocation();
+    // }, []);
 
     // change handlers for the two address inputs
     const handleFirstAddressChange = (event, propertyName) => {
@@ -68,7 +68,7 @@ function LocationTesting() {
 
     // on click, packs up information from both address inputs and sends them to Google Maps route
     const sendAddressInfo = () => {
-        console.log('address objects', firstAddress, secondAddress);
+        // console.log('address objects', firstAddress, secondAddress); 
 
 
         // GET request
@@ -87,12 +87,36 @@ function LocationTesting() {
             },
         })
             .then(response => {
-                console.log('response for addresses:', response.data);
-            })
+                console.log('Got to nested GET request');
+                // then fetch server-stored address object data sent by Google
+                axios.get('/api/addresses/send')
+                    .then(secondResponse => {
+                        console.log('data in response', secondResponse.data);
+                    })
+                    .catch(err => {
+                        console.log('problem with nested GET for server data', err);
+                    })
+                // console.log('response for addresses:', response.data);
+                
+            }) // end .then for Google API request
+            // catch for first GET to Google API
             .catch(err => {
                 console.log('Problem with addresses distance between GET', err);
             })
     }
+
+    // click handler to GET data from server stored after Google API request
+    const calculateDistance = () => {
+        console.log('clicked');
+        axios.get('/api/addresses/send')
+        .then(response => {
+            console.log('data in response', response.data);
+        })
+        .catch(err => {
+            console.log('problem with nested GET for server data', err);
+        })
+    }
+
 
     // console.log('local location state', currentLocation);
     // console.log('Current address object', firstAddress, secondAddress);
@@ -163,10 +187,16 @@ function LocationTesting() {
                     color="primary"
                     onClick={sendAddressInfo}
                 >
-                    Get Distance
+                    Send Addresses
                 </Button>
             </FormControl>
-
+            <Button 
+                variant="contained"
+                color="primary"
+                onClick={calculateDistance}
+            >
+                Calculate Distance
+            </Button>
             
         </div>
 
