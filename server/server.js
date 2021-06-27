@@ -17,16 +17,10 @@ app.use(express.static('build'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
 // proxy api
-app.get('/location', (req, res) => {
-    axios.get(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.MAPS_API_KEY}`)
-    .then(response => {
-        console.log(response.data);
-        res.send(response.data);
-    })
-    .catch(err => {
-        console.log(err);
-        res.sendStatus(500);
-    });
+app.get('/api/location', (req, res) => {
+    console.log('Got to GET location');
+    res.send(currentLocation);
+
 })
 
 //find location using Google geolocation API
