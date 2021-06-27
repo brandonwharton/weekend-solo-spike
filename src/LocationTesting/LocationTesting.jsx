@@ -64,12 +64,27 @@ function LocationTesting() {
             })
     }
 
+    // on click, packs up information from both address inputs and sends them to Google Maps route
     const sendAddressInfo = () => {
-        console.log('clicked');
+        console.log('address objects', firstAddress, secondAddress);
+
+
+        // GET request
+        axios.get(`/api/addresses`, {
+            params: {
+                firstNumber: firstAddress.number
+            },
+        })
+            .then(response => {
+                console.log('response for addresses:', response.data);
+            })
+            .catch(err => {
+                console.log('Problem with addresses distance between GET', err);
+            })
     }
 
     // console.log('local location state', currentLocation);
-    console.log('Current address object', firstAddress, secondAddress);
+    // console.log('Current address object', firstAddress, secondAddress);
     return (
         <div className="App-location-testing">
             <Button 
@@ -122,6 +137,13 @@ function LocationTesting() {
                     onChange={(event) => handleSecondAddressChange(event, 'state_code')}
                 >
                 </TextField>
+                <Button 
+                    variant="contained"
+                    color="primary"
+                    onClick={sendAddressInfo}
+                >
+                    Get Distance
+                </Button>
             </FormControl>
 
             

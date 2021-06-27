@@ -45,20 +45,21 @@ app.post('/api/location', (req, res) => {
 })
 
 // GET request to Google's geocaching API to convert given addresses to latitude and longitude
-app.get('/api/location/address', (req, res) => {
-    console.log('Got to geocaching GET');
+app.get('/api/addresses', (req, res) => {
+    console.log('Got to geocaching GET', req.query);
+    
     
     const queryText = `https://maps.googleapis.com/maps/api/geocode/json?address=5609+Benton+Ave,+Edina,+MN&key=${process.env.MAPS_API_KEY}`;
-
-    axios.get(queryText)
-        .then(response => {
-            console.log('Response for address', response.data);
+    res.sendStatus(200);
+    // axios.get(queryText)
+    //     .then(response => {
+    //         console.log('Response for address', response.data);
             
-        })
-        .catch(err => {
-            console.log('Problem with converting given location', err);
-            res.sendStatus(500);
-        })
+    //     })
+    //     .catch(err => {
+    //         console.log('Problem with converting given location', err);
+    //         res.sendStatus(500);
+    //     })
 })
 
 /** ---------- START SERVER ---------- **/
