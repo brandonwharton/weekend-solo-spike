@@ -6,14 +6,19 @@ const axios = require('axios');
 // activates dotenv to look at .env file
 require('dotenv').config();
 
+// Route includes
+const locationRouter = require('./routes/location.router');
 // holds current location after fetching it from Google
 let currentLocation;
+let address1 = [];
+let address2 = [];
 
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(bodyParser.json()); // needed for axios requests
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('build'));
+
 
 /** ---------- EXPRESS ROUTES ---------- **/
 // proxy api
@@ -35,6 +40,23 @@ app.post('/api/location', (req, res) => {
         })
         .catch(err => {
             console.log('Problem with finding current location', err);
+            res.sendStatus(500);
+        })
+})
+
+// GET request to Google's geocaching API to convert given addresses to latitude and longitude
+app.get('/api/location/address', (req, res) => {
+    console.log('Got to geocaching GET');
+    
+    const queryText = `https://maps.googleapis.com/maps/api/geocode/json?address=5609+Benton+Ave,+Edina,+MN&key=${process.env.MAPS_API_KEY}`;
+
+    axios.get(queryText)
+        .then(response => {
+            console.log('Response for address', response.data);
+            
+        })
+        .catch(err => {
+            console.log('Problem with converting given location', err);
             res.sendStatus(500);
         })
 })
