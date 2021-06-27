@@ -148,7 +148,7 @@ function LocationTesting() {
             </Button>
             <FormControl className="address-form">
                 <TextField 
-                    label="first address number"
+                    label="start address number"
                     onChange={(event) => handleFirstAddressChange(event, 'number')}
                 >
                 </TextField>
@@ -157,11 +157,11 @@ function LocationTesting() {
                     onChange={(event) => handleFirstAddressChange(event, 'street_name')}
                 >
                 </TextField>
-                <TextField 
+                {/* <TextField 
                     label="street type"
                     onChange={(event) => handleFirstAddressChange(event, 'street_type')}
                 >
-                </TextField>
+                </TextField> */}
                 <TextField 
                     label="city"
                     onChange={(event) => handleFirstAddressChange(event, 'city')}
@@ -184,11 +184,11 @@ function LocationTesting() {
                     onChange={(event) => handleSecondAddressChange(event, 'street_name')}
                 >
                 </TextField>
-                <TextField 
+                {/* <TextField 
                     label="street type"
                     onChange={(event) => handleSecondAddressChange(event, 'street_type')}
                 >
-                </TextField>
+                </TextField> */}
                 <TextField 
                     label="city"
                     onChange={(event) => handleSecondAddressChange(event, 'city')}
