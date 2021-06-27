@@ -72,7 +72,14 @@ function LocationTesting() {
         // GET request
         axios.get(`/api/addresses`, {
             params: {
-                firstNumber: firstAddress.number
+                firstNumber: firstAddress.number,
+                firstStreet: firstAddress.street_name,
+                firstCity: firstAddress.city,
+                firstState: firstAddress.state_code,
+                secondNumber: secondAddress.number,
+                secondStreet: secondAddress.street_name,
+                secondCity: secondAddress.city,
+                secondState: secondAddress.state_code,
             },
         })
             .then(response => {
